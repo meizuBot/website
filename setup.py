@@ -8,7 +8,7 @@ setup(
     name="web",
     author="me",
     version="222222.2",
-    packages=["src"],
+    packages=["web"],
     python_requires=">=3.9.0",
     install_requires=requirements
 )
