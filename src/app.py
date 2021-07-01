@@ -1,5 +1,5 @@
 from starlette.applications import Starlette
-from starlette.responses import Response, RedirectResponse
+from starlette.responses import Response
 from starlette.routing import Route, Mount
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
