@@ -6,6 +6,8 @@ from starlette.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
 from . import ipc
 
+__all__ = ("app",)
+
 templates = Jinja2Templates(directory="web/templates")
 client = ipc.Client()
 
