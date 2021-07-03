@@ -4,7 +4,7 @@ from starlette.routing import Route, Mount
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
-import ipc
+from . import ipc
 
 __all__ = ("app",)
 
@@ -23,9 +23,9 @@ async def stop():
 
 
 async def index(request: Request) -> Response:
-    stats = await client.request("stats")
+    #stats = await client.request("stats")
     return templates.TemplateResponse(
-        "index.jinja", context={"request": request, "name": bot_name, "stats": stats}
+        "newindex.html", context={"request": request, "name": bot_name}
     )
 
 
@@ -36,9 +36,21 @@ async def not_found(request, exc):
 async def stats(request):
     return templates.TemplateResponse("stats.jinja", context={"request": request, "name": bot_name})
 
+async def test(request: Request) -> Response:
+    return templates.TemplateResponse(
+        "base.html", context={"request": request}
+    )
+
+async def test2(request):
+    return templates.TemplateResponse(
+        "newindex.html", context={"request": request}
+    )
+
 
 routes = [
     Route("/", endpoint=index),
+    Route("/test", endpoint=test),
+    Route("/t", endpoint=test2),
     Route("/stats", endpoint=stats),
     Mount("/static", StaticFiles(directory="web/static")),
 ]
