@@ -46,11 +46,17 @@ async def test2(request):
         "newindex.html", context={"request": request}
     )
 
+async def bootstrap(r):
+    return templates.TemplateResponse(
+        "newindex.html", context={"request": r}
+    )
+
 
 routes = [
     Route("/", endpoint=index),
     Route("/test", endpoint=test),
     Route("/t", endpoint=test2),
+    Route("/b", endpoint=bootstrap),
     Route("/stats", endpoint=stats),
     Mount("/static", StaticFiles(directory="web/static")),
 ]

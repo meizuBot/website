@@ -1,0 +1,12 @@
+{% extends "base.html" %}}
+{% block title %}
+{{ name }}
+{% endblock %}
+{% block main %}
+    <section class="main">
+        <div class="left-align">
+            <div class="text">{{ name.upper() }} | <span>DISCORD BOT</span></div>
+            <a class="invite" href="/invite">Invite {{ name }} to your Server</a>
+        </div>
+    </section>
+{% endblock %}
