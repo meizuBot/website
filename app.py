@@ -1,4 +1,4 @@
-from starlette.applications import Starlette
+from .application import CoolStarlette
 from starlette.responses import Response
 from starlette.routing import Route, Mount
 from starlette.requests import Request
@@ -9,17 +9,7 @@ from . import ipc
 __all__ = ("app",)
 
 templates = Jinja2Templates(directory="web/templates")
-client = ipc.Client()
-
 bot_name = "Walrus"
-
-
-async def start():
-    await client.initiate()
-
-
-async def stop():
-    await client.close()
 
 
 async def index(request: Request) -> Response:
@@ -63,6 +53,6 @@ routes = [
 
 exceptions = {404: not_found}
 
-app = Starlette(
-    debug=False, routes=routes, exception_handlers=exceptions, on_startup=[start], on_shutdown=[stop]
+app = CoolStarlette(
+    debug=False, routes=routes, exception_handlers=exceptions
 )
