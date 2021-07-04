@@ -13,22 +13,21 @@ bot_name = "Walrus"
 
 
 async def index(request: Request) -> Response:
-    #stats = await client.request("stats")
     return templates.TemplateResponse(
         "bootstrap_index.html", context={"request": request, "name": bot_name}
     )
 
 
 async def not_found(request, exc):
-    return templates.TemplateResponse("404.jinja", context={"request": request})
+    return templates.TemplateResponse("404.html", context={"request": request})
 
 
 async def stats(request):
-    return templates.TemplateResponse("stats.jinja", context={"request": request, "name": bot_name})
+    return templates.TemplateResponse("stats.html", context={"request": request, "name": bot_name})
 
 async def test(request: Request) -> Response:
     return templates.TemplateResponse(
-        "base.html", context={"request": request}
+        "bootstrap.html", context={"request": request, "name": "oogogoag"}
     )
 
 async def test2(request):
@@ -36,17 +35,11 @@ async def test2(request):
         "newindex.html", context={"request": request}
     )
 
-async def bootstrap(r):
-    return templates.TemplateResponse(
-        "bootstrap.html", context={"request": r}
-    )
 
 
 routes = [
     Route("/", endpoint=index),
-    Route("/test", endpoint=test),
-    Route("/t", endpoint=test2),
-    Route("/b", endpoint=bootstrap),
+    Route("/navbar", endpoint=test),
     Route("/stats", endpoint=stats),
     Mount("/static", StaticFiles(directory="web/static")),
 ]

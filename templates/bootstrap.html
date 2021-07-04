@@ -1,9 +1,7 @@
 {% set left_navbar = [
     ("/commands", "COMMANDS"),
     ("/stats", "STATS"),
-    ("/about", "ABOUT"),
     ("/features", "FEATURES"),
-    ("/contact", "CONTACT"),
     ("/dashboard", "DASHBOARD")
 ] %}
 {% set active_page = active_page|default("Home") %}
@@ -20,14 +18,14 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
-            <a href="/" class="navbar-brand">
+            <a href="/" class="navbar-brand text-white py-3">
                 <img src="/static/favicon.ico" width="40" height="40" class="d-inline-block align-text-center">
                 {{ name.upper() }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse col-sm-4 py-3" id="navbarNav">
                 <ul class="navbar-nav">
                     {% for href, name in left_navbar %}
                         <li class="nav-item"><a class="nav-link text-white{% if name == active_page %} active{% endif %}" href=href>{{ name }}</a></li>

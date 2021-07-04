@@ -25,6 +25,11 @@ class CoolStarlette(Starlette):
             lifespan=lifespan
         )
         self.session = aiohttp.ClientSession()
+        self.router.on_startup.append(self.startup)
+        self.router.on_shutdown.append(self.shutdown)
 
-    async def close(self):
+    async def startup(self):
+        ...
+
+    async def shutdown(self):
         await self.session.close()
