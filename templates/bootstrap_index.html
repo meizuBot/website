@@ -1,0 +1,23 @@
+{% extends "bootstrap.html" %}
+{% block title %}
+{{ name}}
+{% endblock %}
+
+{% block head %}
+    <link href="/static/css/bootstrap_index.css" rel="stylesheet">
+{% endblock %}
+
+{% block container_values %}
+text-light background-dark
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center" style="padding-top: 10vh; padding-bottom: 10vh;">
+        <div class="col-xxl-6 col-xl-7 col-md-8 col-sm-9 col-xs-12">
+            <h1 class="text-center main-title titan" itemprop="name">{{ name.upper() }} | <span>DISCORD BOT</span></h1>
+            <div class="col-12 text-center"></div>
+                <a href="/invite" class="btn btn-warning btn-lg" role="button">Invite Me</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

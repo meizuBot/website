@@ -25,7 +25,7 @@ async def stop():
 async def index(request: Request) -> Response:
     #stats = await client.request("stats")
     return templates.TemplateResponse(
-        "newindex.html", context={"request": request, "name": bot_name}
+        "bootstrap_index.html", context={"request": request, "name": bot_name}
     )
 
 
@@ -48,7 +48,7 @@ async def test2(request):
 
 async def bootstrap(r):
     return templates.TemplateResponse(
-        "newindex.html", context={"request": r}
+        "bootstrap.html", context={"request": r}
     )
 
 
