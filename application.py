@@ -4,7 +4,9 @@ from starlette.routing import BaseRoute
 import typing
 import aiohttp
 from config import gist
-import json
+
+def filter_subcommands(command, subcommands):
+    ...
 
 class CoolStarlette(Starlette):
     def __init__(
@@ -40,7 +42,30 @@ class CoolStarlette(Starlette):
         self.data = content
 
     async def fetch(self, endpoint: str) -> dict:
-        ...
+        try:
+            raise aiohttp.ClientConnectorError
+        except aiohttp.ClientConnectorError:
+            ...
+        if endpoint == "/all":
+            return self.data
+        
+        if endpoint in ("/stats", "/socket", "/cogs"):
+            return self.data[endpoint]
+        
+        if endpoint.startswith("/cog/"):
+            cog = endpoint.lstrip("/cog/")
+            return self.data["cogs"].get(cog)
+        
+        if endpoint.startswith("/command/"):
+            command = endpoint.lstrip("/command/")
+            for cog in self.data["cogs"]:
+                for cmd in cog["commands"]:
+                    if command == cmd:
+                        return cmd
+                    for subcmd in cmd["subcommands"]:
+                        if command == cmd:
+                            return cmd
+        
 
     async def shutdown(self):
         await self.session.close()
