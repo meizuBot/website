@@ -4,7 +4,6 @@ from starlette.routing import Route, Mount
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
-from . import ipc
 
 __all__ = ("app",)
 
