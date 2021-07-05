@@ -20,10 +20,6 @@ async def index(request: Request) -> Response:
 async def not_found(request, exc):
     return templates.TemplateResponse("404.html", context={"request": request})
 
-
-async def stats(request):
-    return templates.TemplateResponse("stats.html", context={"request": request, "name": bot_name})
-
 async def test(request: Request) -> Response:
     return templates.TemplateResponse(
         "bootstrap.html", context={"request": request, "name": "oogogoag"}
@@ -39,7 +35,6 @@ async def test2(request):
 routes = [
     Route("/", endpoint=index),
     Route("/navbar", endpoint=test),
-    Route("/stats", endpoint=stats),
     Mount("/static", StaticFiles(directory="web/static")),
 ]
 

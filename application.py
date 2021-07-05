@@ -3,6 +3,8 @@ from starlette.middleware import Middleware
 from starlette.routing import BaseRoute
 import typing
 import aiohttp
+from config import gist
+import json
 
 class CoolStarlette(Starlette):
     def __init__(
@@ -24,11 +26,20 @@ class CoolStarlette(Starlette):
             on_shutdown=on_shutdown,
             lifespan=lifespan
         )
-        self.session = aiohttp.ClientSession()
+        self.session = None
+        self.data = None
         self.router.on_startup.append(self.startup)
         self.router.on_shutdown.append(self.shutdown)
 
     async def startup(self):
+        self.session = aiohttp.ClientSession()
+        url = "https://api.github.com/gists/" + gist.id
+        async with self.session.get(url) as resp:
+            data = await resp.json()
+        content = data["files"]["data.json"]["content"]
+        self.data = content
+
+    async def fetch(self, endpoint: str) -> dict:
         ...
 
     async def shutdown(self):
