@@ -30,11 +30,16 @@ async def test2(request):
         "newindex.html", context={"request": request}
     )
 
+async def why(r):
+    item = r.path_params["endpoint"]
+    return Response(str(await r.app.fetch(item)))
+
 
 
 routes = [
     Route("/", endpoint=index),
     Route("/navbar", endpoint=test),
+    Route("/test/{endpoint:path}", endpoint=why),
     Mount("/static", StaticFiles(directory="web/static")),
 ]
 

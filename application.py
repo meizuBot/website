@@ -2,11 +2,9 @@ from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.routing import BaseRoute
 import typing
+import json
 import aiohttp
 from config import gist
-
-def filter_subcommands(command, subcommands):
-    ...
 
 class CoolStarlette(Starlette):
     def __init__(
@@ -39,33 +37,48 @@ class CoolStarlette(Starlette):
         async with self.session.get(url) as resp:
             data = await resp.json()
         content = data["files"]["data.json"]["content"]
-        self.data = content
+        self.data = json.loads(content)
 
     async def fetch(self, endpoint: str) -> dict:
-        try:
-            raise aiohttp.ClientConnectorError
-        except aiohttp.ClientConnectorError:
-            ...
-        if endpoint == "/all":
+        endpoint = endpoint.lstrip("/")
+        if endpoint == "all":
             return self.data
         
-        if endpoint in ("/stats", "/socket", "/cogs"):
+        if endpoint in ("stats", "socket", "cogs"):
             return self.data[endpoint]
         
-        if endpoint.startswith("/cog/"):
-            cog = endpoint.lstrip("/cog/")
+        if endpoint.startswith("cog/"):
+            cog = "".join(endpoint.split("cog/", 1))
             return self.data["cogs"].get(cog)
         
-        if endpoint.startswith("/command/"):
-            command = endpoint.lstrip("/command/")
-            for cog in self.data["cogs"]:
-                for cmd in cog["commands"]:
-                    if command == cmd:
-                        return cmd
-                    for subcmd in cmd["subcommands"]:
-                        if command == cmd:
-                            return cmd
-        
+        if endpoint.startswith("command/"):
+            command = "".join(endpoint.split("command/", 1))
+            items = command.split("/")
+
+            parent = None
+            for cog in self.data["cogs"].values():
+                for cmd in cog["commands"].values():
+                    if cmd["name"] == items[0]:
+                        parent = cmd
+                        break
+                if parent is not None:
+                    break
+
+            if len(items) == 1 or parent is None:
+                return parent
+
+            for cmd in items[1:]:
+                for _cmd in parent["subcommands"].values():
+                    if _cmd["name"] == cmd:
+                        parent = _cmd
+                        break
+                if parent is None:
+                    break
+
+            return parent
+            
+
+        return None
 
     async def shutdown(self):
         await self.session.close()
