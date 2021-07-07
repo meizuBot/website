@@ -5,6 +5,7 @@ import typing
 import json
 import aiohttp
 from config import gist
+import asyncio
 
 class CoolStarlette(Starlette):
     def __init__(
@@ -39,43 +40,51 @@ class CoolStarlette(Starlette):
         content = data["files"]["data.json"]["content"]
         self.data = json.loads(content)
 
+    async def api_request(self, endpoint) -> typing.Union[dict, None]:
+        local_api = "http://localhost:8080/api/"
+        async with self.session.get(local_api + endpoint) as resp:
+                return await resp.json()
+
     async def fetch(self, endpoint: str) -> dict:
         endpoint = endpoint.lstrip("/")
-        if endpoint == "all":
-            return self.data
-        
-        if endpoint in ("stats", "socket", "cogs"):
-            return self.data[endpoint]
-        
-        if endpoint.startswith("cog/"):
-            cog = "".join(endpoint.split("cog/", 1))
-            return self.data["cogs"].get(cog)
-        
-        if endpoint.startswith("command/"):
-            command = "".join(endpoint.split("command/", 1))
-            items = command.split("/")
+        try: 
+            return await asyncio.wait_for(self.api_request(endpoint), timeout=0.4)
+        except asyncio.TimeoutError:
+            if endpoint == "all":
+                return self.data
+            
+            if endpoint in ("stats", "socket", "cogs"):
+                return self.data[endpoint]
+            
+            if endpoint.startswith("cog/"):
+                cog = "".join(endpoint.split("cog/", 1))
+                return self.data["cogs"].get(cog)
+            
+            if endpoint.startswith("command/"):
+                command = "".join(endpoint.split("command/", 1))
+                items = command.split("/")
 
-            parent = None
-            for cog in self.data["cogs"].values():
-                for cmd in cog["commands"].values():
-                    if cmd["name"] == items[0]:
-                        parent = cmd
+                parent = None
+                for cog in self.data["cogs"].values():
+                    for cmd in cog["commands"].values():
+                        if cmd["name"] == items[0]:
+                            parent = cmd
+                            break
+                    if parent is not None:
                         break
-                if parent is not None:
-                    break
 
-            if len(items) == 1 or parent is None:
+                if len(items) == 1 or parent is None:
+                    return parent
+
+                for cmd in items[1:]:
+                    for _cmd in parent["subcommands"].values():
+                        if _cmd["name"] == cmd:
+                            parent = _cmd
+                            break
+                    if parent is None:
+                        break
+
                 return parent
-
-            for cmd in items[1:]:
-                for _cmd in parent["subcommands"].values():
-                    if _cmd["name"] == cmd:
-                        parent = _cmd
-                        break
-                if parent is None:
-                    break
-
-            return parent
             
 
         return None
