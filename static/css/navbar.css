@@ -2,27 +2,22 @@
 
 :root {
   --blue: #2E5090;
-  --navbar-dark: #23272a;
+  --navbar: #aa6a7d;
   --white: #fff;
   --container-dark: #2f3136;
   --blurple: #5865f2;
-  --purple: #9859f0;
+  --purple: #6c3eac;
 }
 
-body {
-  margin: 0;
-  font-family: var(--bs-font-sans-serif);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
-}
 
 .navbar {
-  background-color: var(--purple);
+  padding: .75rem 0;
+  background-color: var(--navbar);
+}
+
+.navbar-nav-svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .nav-link.active {
@@ -31,7 +26,5 @@ body {
 }
 
 .navbar .navbar-nav .nav-link {
-  padding-right: .25rem;
-  padding-left: .25rem;
   color: rgba(255,255,255,0.85);
 }
