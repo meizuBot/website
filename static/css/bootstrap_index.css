@@ -5,6 +5,16 @@
     font-weight: bold;
 }
 
+.masthead {
+    padding: 3rem 0;
+    background: linear-gradient(165deg, #f7f5fb 50%, #fff 50%);
+}
+
+.masthead h1 {
+    font-size: calc(1.525rem + 3.3vw);
+    line-height: 1;
+}
+
 .main-title {
     font-size: 70px;
 }

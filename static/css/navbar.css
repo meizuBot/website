@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
 :root {
   --blue: #2E5090;
   --navbar: #aa6a7d;
@@ -11,8 +9,7 @@
 
 
 .navbar {
-  padding: .75rem 0;
-  background-color: var(--navbar);
+  background-color: var(--bs-pink);
 }
 
 .navbar-nav-svg {

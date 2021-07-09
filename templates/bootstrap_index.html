@@ -8,20 +8,22 @@
 {% endblock %}
 
 {% block container_values %}
-text-light background-dark
+text-dark
 {% endblock %}
 
 {% block content %}
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light titan main-title">{{ name }}</h1>
-            <p class="lead text-light" style="opacity: 75%">basically I am the best bot</p>
-            <p>
-              <a href="/invite" class="btn btn-primary my-2 invite">Invite me</a>
-              <a href="/support" class="btn btn-secondary my-2">Join the support server</a>
-            </p>
-          </div>
+    <main>
+        <div class="masthead mb-3" id="content">
+            <div class="container px-4 px-md-3">
+                <div class="row align-items-lg-center">
+                    <h1 class="mb-3">{{ name }}</h1>
+                    <p class="lead" style="opacity: 75%">basically I am the best bot</p>
+                    <p>
+                        <a href="/invite" class="btn btn-lg btn-primary my-2 invite">Invite me</a>
+                        <a href="/support" class="btn btn-lg btn-secondary my-2">Join the support server</a>
+                    </p>
+                </div>
+            </div>
         </div>
-      </section>
+    </main>
 {% endblock %}
