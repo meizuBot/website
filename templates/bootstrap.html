@@ -11,7 +11,6 @@
 <head>
     <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/navbar.css" rel="stylesheet">
-    <script src="/static/js/bootstrap/bootstrap.bundle.min.js"></script>
     <title>{% block title %}{% endblock %}</title>
     {% block head %}
     {% endblock %}
@@ -38,4 +37,17 @@
     </header>
     {% block content %}
     {% endblock %}
+
+    <script src="/static/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/theme.js"></script>
+    {% block js %}
+    {% endblock %}
+    <footer class="bg-light">
+        <div class="container">
+            <p class="float-end">
+                <a href="#">Top</a>
+                <a onclick="toggleTheme()">Toggle Theme</a>
+            </p>
+        </div>
+    </footer>
 </body>
