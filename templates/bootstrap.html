@@ -42,12 +42,52 @@
     <script src="/static/js/theme.js"></script>
     {% block js %}
     {% endblock %}
-    <footer class="bg-light">
-        <div class="container">
-            <p class="float-end">
-                <a href="#">Top</a>
-                <a onclick="toggleTheme()">Toggle Theme</a>
-            </p>
-        </div>
+    <footer class="pt-3 bg-light">
+        <div class="navbar bg-transparent">
+            <div class="container">
+                <div class="row center">
+                    <div class="col-md-5">
+                        <h2 class=""><a href="/" class="link-dark text-decoration-none">{{ name }}</a></h5>
+                        <ul class="list-unstyled small text-muted">
+                            <li class="mb-2">Designed and build from the ground up by <a href="https://github.com/ppotatoo">ppotatoo</a>.</li>
+                            <li class="mb-2">Code licensed <a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL 2.0</a>.</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 offset-lg-1">
+                        <h5>Links</h5>
+                        <ul class="list-unstyled">
+                            {% for href, caption in left_navbar %}
+                                <li class="mb-1"><a href=href>{{ caption }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-lg-2">
+                        <h5>Socials</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-1">
+                                <a href="/support">Discord</a>
+                            </li>
+                            <li class="mb-1">
+                                <a href="https://github.com/reallybadbot">GitHub</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2">
+                        <h5>Legal</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-1">
+                                <a href="/staff">Staff</a>
+                            </li>
+                            <li class="mb-1">
+                                <a href="/terms">Terms</a>
+                            </li>
+                            <li class="mb-1">
+                                <a href="/privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </footer>
 </body>

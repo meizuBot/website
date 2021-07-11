@@ -1,6 +1,6 @@
 .masthead {
     padding: 3rem 0;
-    background: linear-gradient(165deg, #dfdfdf 50%, #fff 50%);
+    background: linear-gradient(165deg, #f7f5fb 50%, #fff 50%);
 }
 
 .masthead h1 {
@@ -20,7 +20,7 @@
 }
 
 .award {
-    fill: var(--bs-pink);
+    fill: var(--bs-primary);
     transition: all 0.7s ease;
 }
 
