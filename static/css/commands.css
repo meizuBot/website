@@ -1,0 +1,8 @@
+.nav-masthead .nav-link {
+    color: black;
+}
+
+.cog-masthead .cogs li {
+    list-style: none;
+    display: block;
+}

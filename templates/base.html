@@ -27,7 +27,7 @@
                 </svg>
               </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
+                <ul class="navbar-nav flex-row flex-wrap pt-2 py-md-0">
                     {% for href, caption in left_navbar %}
                         <li class="nav-item col-6 col-md-auto"><a class="nav-link p-2{% if caption == active_page %} active{% endif %}" href="{{ href }}">{{ caption }}</a></li>
                     {% endfor %}
@@ -38,9 +38,7 @@
     {% block content %}
     {% endblock %}
 
-    <script src="/static/js/bootstrap/bootstrap.bundle.min.js"></script>
-    {% block js %}
-    {% endblock %}
+
     <footer class="pt-3 bg-light">
         <div class="navbar bg-transparent">
             <div class="container">
@@ -89,4 +87,7 @@
             </div>
         </nav>
     </footer>
+    <script src="/static/js/bootstrap/bootstrap.bundle.min.js"></script>
+    {% block js %}
+    {% endblock %}
 </body>

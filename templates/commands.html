@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link href="static/css/commands.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container pt-4">
+        <header class="mb-auto">
+            <nav class="nav cog-masthead justify-content-center float-md-middle" style="background-color: white">
+                <ul class="navbar-nav">
+                    {% for cog in cogs %}
+                        <li class="nav-item">
+                            <a class="nav-link p-1" href="/cogs/{{ cog.lower() }}">{{ cog }}</a></li>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </header>
+    </div>
+{% endblock %}
