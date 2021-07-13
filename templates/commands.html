@@ -6,16 +6,14 @@
 
 {% block content %}
     <div class="container pt-4">
-        <header class="mb-auto">
-            <nav class="nav cog-masthead justify-content-center float-md-middle" style="background-color: white">
-                <ul class="navbar-nav">
-                    {% for cog in cogs %}
-                        <li class="nav-item">
-                            <a class="nav-link p-1" href="/cogs/{{ cog.lower() }}">{{ cog }}</a></li>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
-        </header>
+        <div class="row mb-3">
+            <div class="col-4 left-nav">
+                <h1>Table of Contents</h1>
+            </div>
+            <main class="col-8">
+                <h1>Commands</h1>
+            </main>
+        </div>
+        
     </div>
 {% endblock %}
