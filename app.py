@@ -85,7 +85,7 @@ async def commands(request: Request) -> Response:
             examples = f"<code>{cmd['qualified_name']}</code>"
         
         if isinstance((params_ := cmd["params"]), dict):
-            params = "\n".join(f"<code>{param}</code>: {value}" for param, value in params_.items())
+            params = "<br>".join(f"<code>{param}</code>: {value}" for param, value in params_.items())
         else:
             params = params_
 
